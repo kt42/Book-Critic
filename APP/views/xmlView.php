@@ -11,7 +11,7 @@ class xmlView
 	
 	public function output() 
 	{
-		//prepare the xml response
+		//prepare the xml responsess
 		$xmlResponse = xmlrpc_encode ( $this->model->responseBody );
 		$this->slimApp->response->write($xmlResponse);
 		

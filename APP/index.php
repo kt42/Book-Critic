@@ -53,7 +53,7 @@ $slimAppInstance->map ( "/books/search/(:searchString)", function ($searchString
 	new runSearchLogic("BookModel", "BookController", $viewType, $searchString); // load the search function with the necessary parameters
 } )->via ( "GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD" );
 
-// Search Reviews
+// Search Reviewss
 $slimAppInstance->map ( "/reviews/search/(:searchString)", function ($searchString = null) use($slimAppInstance)
 {
 	$slimAppInstance = \Slim\Slim::getInstance();
