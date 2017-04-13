@@ -66,8 +66,9 @@ and then use via-> and add the names of the methods available as a string e.g. "
 ## Use Cases:
 Users:
 Retrieve book reviews by book name                  (GET /reviews/search/"book_name")
+
 Retrieve book details by book name                  (GET /books/search/"book_name")
-Retrieve all book reviews in the database           (GET /reviews/search/) 
+Retrieve all book reviews in the database           (GET /reviews/search/)
 Retrieve all books details in the database          (GET /books/search/)
  
 Critics:
