@@ -64,29 +64,28 @@ and then use via-> and add the names of the methods available as a string e.g. "
 
 
 ## Use Cases:
-Users:
-Retrieve book reviews by book name                  (GET /reviews/search/"book_name")
-
-Retrieve book details by book name                  (GET /books/search/"book_name")
-Retrieve all book reviews in the database           (GET /reviews/search/)
-Retrieve all books details in the database          (GET /books/search/)
+Users:  
+Retrieve book reviews by book name                  (GET /reviews/search/"book_name")  
+Retrieve book details by book name                  (GET /books/search/"book_name")  
+Retrieve all book reviews in the database           (GET /reviews/search/)  
+Retrieve all books details in the database          (GET /books/search/)  
  
-Critics:
-Retrieve book details by db id  (GET /books/admin/"book_id")
-Add a new book details          (POST /books/admin/)
-Edit a book details             (PUT /books/admin/"book_id")
-Delete a book                   (DELETE /books/admin/"book_id")
+Critics:  
+Retrieve book details by db id  (GET /books/admin/"book_id")  
+Add a new book details          (POST /books/admin/)  
+Edit a book details             (PUT /books/admin/"book_id")  
+Delete a book                   (DELETE /books/admin/"book_id")  
 
-Retrieve a review by db id      (GET /books/admin/"review_id")
-Add a new review                (POST /reviews/admin/)
-Edit a review                   (PUT /reviews/admin/"review_id")
-Delete a review                 (DELETE /reviews/admin/"review_id")
+Retrieve a review by db id      (GET /books/admin/"review_id")  
+Add a new review                (POST /reviews/admin/)  
+Edit a review                   (PUT /reviews/admin/"review_id")  
+Delete a review                 (DELETE /reviews/admin/"review_id")  
 
-Critics: (change to Admins)
-Retrieve a critic by id         (GET /critics/admin/"critic_id")
-Add a new critic                (POST /critics/admin/)
-Edit a critics details          (PUT /critics/admin/"critic_id")
-Delete a critic                 (DELETE /critics/admin/"critic_id")
+Critics: (change to Admins)  
+Retrieve a critic by id         (GET /critics/admin/"critic_id")  
+Add a new critic                (POST /critics/admin/)  
+Edit a critics details          (PUT /critics/admin/"critic_id")  
+Delete a critic                 (DELETE /critics/admin/"critic_id")  
 
 
 ## TO DO:
