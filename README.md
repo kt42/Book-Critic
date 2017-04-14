@@ -1,21 +1,21 @@
 # Book-Critic
 
-This is a web application for book reviews.
-It uses the REST architecture to allow client/server communication.
+This is a web application for book reviews.  
+It uses the REST architecture to allow client/server communication.  
 
-The server holds a list of books (book name, isbn, description)
-Critics can push their reviews of these books to the server.
-Users can then pull the reviews of these books from the server.
-This is done through REST calls using an appropriate HTTP method and URL e.g. GET bookcritic.com/books/search/ulysses
+The server holds a list of books (book name, isbn, description)  
+Critics can push their reviews of these books to the server.  
+Users can then pull the reviews of these books from the server.  
+This is done through REST calls using an appropriate HTTP method and URL e.g. GET bookcritic.com/books/search/ulysses  
 
-Slim Framework v2 is used to implement the REST API.
-Slim's Custom Routing is used to allow multiple HTTP methods for each URL.
-Slim will handle returning the response status, header and body.
+Slim Framework v2 is used to implement the REST API.  
+Slim's Custom Routing is used to allow multiple HTTP methods for each URL.  
+Slim will handle returning the response status, header and body.  
 
 
 ## Slim Installation (from http://docs.slimframework.com/start/get-started/):
-Manual install (not composer install)
-Download and extract the Slim Framework into your project directory and then "require" it in your application's index.php file:
+Manual install (not composer install)  
+Download and extract the Slim Framework into your project directory and then "require" it in your application's index.php file:  
 
  - require 'Slim/Slim.php';
 
@@ -36,23 +36,23 @@ And Run the Slim application:
 
 
 ## Slim Routing (from http://docs.slimframework.com/routing/overview/)
-With Slim you can map resource URIs (aka URLs) to callback functions for specific HTTP request methods (e.g. GET, POST, PUT, DELETE, OPTIONS or HEAD)
+With Slim you can map resource URIs (aka URLs) to callback functions for specific HTTP request methods (e.g. GET, POST, PUT, DELETE, OPTIONS or HEAD)  
 
-You can load a specific function to do something for a specific http request method, for a specific URI resource
-Example: "GET www.library.com/book/ulysses"
-In this example the http request method is GET and the URI resource is the data stored at the location www.library.com/book/ulysses.
+You can load a specific function to do something for a specific http request method, for a specific URI resource  
+Example: "GET www.library.com/book/ulysses"  
+In this example the http request method is GET and the URI resource is the data stored at the location www.library.com/book/ulysses.  
 
-Through Slim's routing a specific function is ran for this request
-For example; a function to return the data at www.library.com/book/ulysses
-If the Slim application does not find routes that match the URI and HTTP method, it will return a 404 Not Found response.
+Through Slim's routing a specific function is ran for this request  
+For example; a function to return the data at www.library.com/book/ulysses  
+If the Slim application does not find routes that match the URI and HTTP method, it will return a 404 Not Found response.  
 
 
-## Custom Routing (from http://docs.slimframework.com/routing/custom/)
-You may want a resource URI to responds to multiple HTTP methods.
-Slim's Custom Routes allow this.
+## Custom Routing (from http://docs.slimframework.com/routing/custom/)  
+You may want a resource URI to responds to multiple HTTP methods.  
+Slim's Custom Routes allow this.  
 
-use map-> instead of get-> (or post->, put->, delete-> etc.)
-and then use via-> and add the names of the methods available as a string e.g. "GET", "POST"
+use map-> instead of get-> (or post->, put->, delete-> etc.)  
+and then use via-> and add the names of the methods available as a string e.g. "GET", "POST"  
 
  - $app = new \Slim\Slim();
  - $app->map('/foo/bar', function()
@@ -89,49 +89,47 @@ Delete a critic                 (DELETE /critics/admin/"critic_id")
 
 
 ## TO DO:
-Remove "author name" from book details search author name 
-Add Admins instead of critics 
-Remove critics ability to delete or edit a review that isn't theirs (using logged in critic id to match critic id of the review?)
+Remove "author name" from book details search author name  
+Add Admins instead of critics  
+Remove critics ability to delete or edit a review that isn't theirs (using logged in critic id to match critic id of the review?)  
 
-Allow searching with both numbers and stings i.e. remove is_string
-Changes routes to from item/search and item/admin to search/item and admin/item
+Allow searching with both numbers and stings i.e. remove is_string  
+Changes routes to from item/search and item/admin to search/item and admin/item  
 Add function in booksdao to allow checking if the book actually exists before trying to update it (PUT),  
-// its curently giving 400 bad request, "invalid body" if the record doesn't exist, regardless if the json body is ok
-// it should instead return 204 - NO CONTENT , then 400 bad request if the body's not right
-Remove encoding of response bodys to json for errors ? e.g. PUT returns json:  {"Message:":"Resource has been updated","updatedID":"67"}
-but non numeric id on an admin request returns: "Request is ok but the wrong type of url parameters were passed". (not json encoded) 
-- so either encode all error responses or no error responses
+// its curently giving 400 bad request, "invalid body" if the record doesn't exist, regardless if the json body is ok  
+// it should instead return 204 - NO CONTENT , then 400 bad request if the body's not right  
+Remove encoding of response bodys to json for errors ? e.g. PUT returns json:  {"Message:":"Resource has been updated","updatedID":"67"}  
+but non numeric id on an admin request returns: "Request is ok but the wrong type of url parameters were passed". (not json encoded)   
+- so either encode all error responses or no error responses  
 
-Add more tests, for the calls themselfs
+Add more tests, for the calls themselfs  
 
 
 
 ## Checklist
-Portability:
-Totally configurable from config.inc.php file 
+Portability:  
+Totally configurable from config.inc.php file  
  
-Testing:
-73 validation tests implemented on isEmailValid, isNumberInRangeValid, isLengthStringValid functions
-needs tests for the rest calls
+Testing:  
+73 validation tests implemented on isEmailValid, isNumberInRangeValid, isLengthStringValid functions  
+needs tests for the rest calls  
  
-MVC-correctness:
-Yes, throughout 
+MVC-correctness:  
+Yes, throughout   
  
-DB Managment:
-DAO objects and PDO manager used
+DB Managment:  
+DAO objects and PDO manager used  
  
-DRY principle:
-Unified "Action" strings that work with all DAOs.
-Single function in index.php used for /search/ and /admin/ routes and each table /reviews/, /books/, /critics/.
+DRY principle:  
+Unified "Action" strings that work with all DAOs.  
+Single function in index.php used for /search/ and /admin/ routes and each table /reviews/, /books/, /critics/.  
  
-Authentication:
-Present and working
+Authentication:  
+Present and working  
  
-Response formats:
-XML + JSON 
+Response formats:  
+XML + JSON   
  
-Response HTTP codes used:
-(BADREQUEST, 400), (UNAUTHORIZED, 401), (FORBIDDEN, 403), (NOTFOUND, 404), (METHODNOTALLOWED, 405), 
-(NOTACCEPTABLE, 406), (INTSERVERERR, 500), (OK, 200), (CREATED, 201), (NOCONTENT, 204)
-
-
+Response HTTP codes used:  
+(BADREQUEST, 400), (UNAUTHORIZED, 401), (FORBIDDEN, 403), (NOTFOUND, 404), (METHODNOTALLOWED, 405),   
+(NOTACCEPTABLE, 406), (INTSERVERERR, 500), (OK, 200), (CREATED, 201), (NOCONTENT, 204)  
