@@ -4,6 +4,7 @@ require_once "conf/config.inc.php";
 Slim\Slim::registerAutoloader ();
 $slimAppInstance = new \Slim\Slim ();
 
+
 /* 
 	How the App Works
 Firstly each route the app can take is declared, (for each action it can perform)
