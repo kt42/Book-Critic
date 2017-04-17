@@ -78,12 +78,11 @@ class BooksDAO
 	{
 		$sql = "SELECT * ";
 		$sql .= "FROM books ";
-		$sql .= "WHERE books.title LIKE CONCAT('%', ?, '%') or books.author LIKE CONCAT('%', ?, '%')  ";
+		$sql .= "WHERE books.title LIKE CONCAT('%', ?, '%') ";
 		$sql .= "ORDER BY books.title ";
 		
 		$stmt = $this->dbManager->prepareQuery ( $sql );
 		$this->dbManager->bindValue ( $stmt, 1, $str, $this->dbManager->STRING_TYPE );
-		$this->dbManager->bindValue ( $stmt, 2, $str, $this->dbManager->STRING_TYPE );
 		
 		$this->dbManager->executeQuery ( $stmt );
 		$rows = $this->dbManager->fetchResults ( $stmt );

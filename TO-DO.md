@@ -1,5 +1,5 @@
 ## TO DO:
-Remove "author name" from book details search author name  
+Remove "author name" from book details search author name  - DONE
 Add Admins instead of critics  
 Remove critics ability to delete or edit a review that isn't theirs (using logged in critic id to match critic id of the review?)  
 
@@ -12,4 +12,5 @@ Remove encoding of response bodys to json for errors ? e.g. PUT returns json:  {
 but non numeric id on an admin request returns: "Request is ok but the wrong type of url parameters were passed". (not json encoded)   
 - so either encode all error responses or no error responses  
 
-Add more tests, for the calls themselfs  
+Add more tests, for the calls themself
+

@@ -4,13 +4,8 @@ require_once "conf/config.inc.php";
 Slim\Slim::registerAutoloader ();
 $slimAppInstance = new \Slim\Slim ();
 
-
-//
-//
-
-
-/* 
-	How the App Works
+                /*/ How the App Works /*/
+/*
 Firstly each route the app can take is declared, (for each action it can perform)
 Each "route" consists of a URL and at least one http method (GET, POST, etc.)
 Codewise, these "routes" are just like declaring functions, and they will run only when $slimAppInstance->run() is called
@@ -21,12 +16,11 @@ If it does find a route with both matching URL and http method, it will execute 
 So the routes listed below do the following if ran:
 1. Instanciate the Slim App Class (the engine of the app)
 2. Decode the requested View type that was passed as a header
-3. Run a function containing the logic that will fulfil the request, Passing the names of the necessary Controller, Model and View required for that request
-
+3. Run a function containing the logic that will fulfil the request, 
+   passing the names of the necessary Controller, Model and View required for that request
 */
 
-
-			/*/ Routes for Search Requests /*/
+		/*/ Routes for Search Requests /*/
 /*
 Search requests should allow users to search for specified books or reviews
 It will return either the books details for /serach/books or the book reviews for /search/reviews
@@ -55,14 +49,15 @@ $slimAppInstance->map ( "/reviews/search/(:searchString)", function ($searchStri
 } )->via ( "GET",  "POST", "PUT", "DELETE", "OPTIONS", "HEAD" );
 
 
-
-			/*/ Routes for Admin Requests /*/
-// Admin requests allow admins to perform CRUD operations on; books, reviews and other admins
-// The request must contain authentication parameters as headers (username, password)
-// If these details successfully authenticate; the logic continues to fulfil the request
-// If not; the app stops and returns a status: 401 Unauthorized
-// An Admin request must also pass a parameter in the URL which is the ID of the record to modify e.g. /admin/books/ID_HERE
-// Unless it is adding a record (with POST), in that case no URL parameter is passed and the app enerates a new ID for the new recored being added
+                /*/ Routes for Admin Requests /*/
+/*
+Admin requests allow admins to perform CRUD operations on; books, reviews and other admins
+The request must contain authentication parameters as headers (username, password)
+If these details successfully authenticate; the logic continues to fulfil the request
+If not; the app stops and returns a status: 401 Unauthorized
+An Admin request must also pass a parameter in the URL which is the ID of the record to modify e.g. /admin/books/ID_HERE
+Unless it is adding a record (with POST), in that case no URL parameter is passed and the app enerates a new ID for the new recored being added
+*/
 
 // Administrate Critics
 $slimAppInstance->map ( "/critics/admin/(:id)", "authenticate", function ($id = null) use($slimAppInstance)
@@ -92,9 +87,9 @@ $slimAppInstance->map ( "/books/admin/(:id)", "authenticate", function ($id = nu
 } )->via ( "GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"  );
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// LOGIC FUNCTIONS - Filter clients request and load MVC Components accordingly //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+                // LOGIC FUNCTIONS - Filter clients request and load MVC Components accordingly //
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
 	// Search Logic Flow //
@@ -234,15 +229,15 @@ class runAdminLogic
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					// LOAD MVC COMPONENTS - Load the functionality of the app + return a "view" //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+                // LOAD MVC COMPONENTS - Load the functionality of the app + return a "view" //
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
-	Now this function will load the components for any Search or Admin requests, using an appropriate Model, Controller and View name
-	The components when loaded will generate a state in the model which represents a response to the request
-	The state generated will then be wrote back to the client, i.e. the response is returned
-	The response format can be decided by the user by passing a custom header with the reqest. e.g. "Content-Type: application/xml"
+    Now this function will load the components for any Search or Admin requests, using an appropriate Model, Controller and View name
+    The components when loaded will generate a state in the model which represents a response to the request
+    The state generated will then be wrote back to the client, i.e. the response is returned
+    The response format can be decided by the user by passing a custom header with the reqest. e.g. "Content-Type: application/xml"
 */
 
 class loadRunMVCComponents 
@@ -256,8 +251,8 @@ class loadRunMVCComponents
 		// The Model, Controller and View Classes are contained in .php files
 		// So first include the necessary .php files, which contain the necessary classes
 		include_once "models/" . $modelName . ".php"; 				// load the model .php file of the passed name string
-		include_once "controllers/" . $controllerName . ".php";		// load the controller .php file of the passed name string
-		include_once "views/" . $viewName . ".php";					// load the view .php file of the passed name string (can only be json or xml)
+		include_once "controllers/" . $controllerName . ".php";                 // load the controller .php file of the passed name string
+		include_once "views/" . $viewName . ".php";				// load the view .php file of the passed name string (can only be json or xml)
 		
 		// Now instanciate the Model, Controller and View classes from each appropriate model.php file
 		// For example if the request was for a book to be returned in xml, the following classes will be instanciated here: 
@@ -298,17 +293,14 @@ class loadRunMVCComponents
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-										// AUTHENTICATION //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+                // AUTHENTICATION //
+////////////////////////////////////////////////////////
 
 /*
-To authenticate; the app 
-
 This function will set the authentication state, using the loadRunMVCComponents function again to process the logic
 This "state" is just one variable ("authStatus") in the Authentication Model
 It can only be set to 200: HTTPSTATUS_OK, 403: HTTPSTATUS_FORBIDDEN, or 401: HTTPSTATUS_UNAUTHORIZED
-
 */
 
 function authenticate(\Slim\Route $route)
@@ -332,11 +324,11 @@ function authenticate(\Slim\Route $route)
 }
 
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-									// CHECK VIEW TYPE - json or xml (passed as header) //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/** this function will check the "Content-Type" header that was passed, it accepts either "Content-Type: application/xml" or "Content-Type: application/json" **/
+//////////////////////////////////////////////////////////////////////////
+            // CHECK VIEW TYPE - json or xml (passed as header) //
+//////////////////////////////////////////////////////////////////////////
+/** this function will check the "Content-Type" header that was passed, 
+ ** it accepts either "Content-Type: application/xml" or "Content-Type: application/json" **/
 
 function checkViewType($slimAppInstance) {
 	$viewType = $slimAppInstance->request->headers->get("Content-Type");
@@ -349,7 +341,6 @@ function checkViewType($slimAppInstance) {
 	return $viewType;
 }
 
-//var_dump("1");
-$slimAppInstance->run();
+$slimAppInstance->run();        // run the app
 
 ?>
