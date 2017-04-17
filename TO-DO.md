@@ -1,8 +1,8 @@
 ## TO DO:
 Remove "author name" from book details search author name  - DONE
+Add .htaccess file to remove need for index.php in url - Done
 Add Admins instead of critics  
 Remove critics ability to delete or edit a review that isn't theirs (using logged in critic id to match critic id of the review?)  
-
 Allow searching with both numbers and stings i.e. remove is_string  
 Changes routes to from item/search and item/admin to search/item and admin/item  
 Add function in booksdao to allow checking if the book actually exists before trying to update it (PUT),  
